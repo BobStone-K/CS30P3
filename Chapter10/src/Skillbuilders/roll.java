@@ -115,5 +115,9 @@ public class roll {
 		});
 		rButton.setBounds(125, 201, 188, 37);
 		panel.add(rButton);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(0, 0, 89, 23);
+		frame.getContentPane().add(btnNewButton);
 	}
 }
