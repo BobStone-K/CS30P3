@@ -43,6 +43,7 @@ public class BreakAPlate {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//loading picture icons 
 		ImageIcon placeHolder = new ImageIcon("../Chapter10/src/Mastery/placeholder.gif");
 		ImageIcon allBroken = new ImageIcon("../Chapter10/src/Mastery/plates_all_broken.gif");
 		ImageIcon twoBroken = new ImageIcon("../Chapter10/src/Mastery/plates_two_broken.gif");
@@ -78,20 +79,27 @@ public class BreakAPlate {
 		
 		playButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//calculating chance to get prize
 				int chance = (int) (2 * Math.random() + 1);
+				//checking if player is playing or resetting the game
 				if(playButton.getText().equals("Play")) {
+					//player is playing again and now checking what they won
 					if(chance == 1) {
+						//won sticker by breaking two plates
 						plateDis.setIcon(twoBroken);
 						rewardDis.setIcon(sticker);
 						playButton.setText("Play Again");
 					}
 					if(chance == 2) {
+						//won tiger by breaking all plates
 						plateDis.setIcon(allBroken);
 						rewardDis.setIcon(Tiger);
 						playButton.setText("Play Again");
 					}
 					return;
+					
 				} else if(playButton.getText().equals("Play Again")) {
+					//player is resetting the game so gui is reloaded
 					plateDis.setIcon(plates);
 					rewardDis.setIcon(placeHolder);
 					playButton.setText("Play");

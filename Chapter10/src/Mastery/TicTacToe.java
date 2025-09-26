@@ -12,10 +12,12 @@ import java.awt.Font;
 import javax.swing.JLabel;
 
 public class TicTacToe {
+	//creating variables to keep track of which player goes and the letters on the board
 	static int player = 0;
 	static String[] board = new String[9];
+	//function to check for a winner
 	public static String checkWinner() {
-		
+		// checking for all the rows win combinations and if any player has got them
 	for( int i = 0; i < 8; i++) {
 		String line = null;
 		 switch (i) {
@@ -46,6 +48,7 @@ public class TicTacToe {
    
 
 	}
+		 //if player has three in a row win it returns the winner 
 	 	    if (line.equals("XXX")) {
                 return "Winner is: X";
             }
@@ -56,9 +59,11 @@ public class TicTacToe {
             }
 
 	}
+	// if there has been 9 rounds and there is no three in a row win then it returns its a draw
 	if(player == 9) {
 		return "Draw";	
 	}
+	//if nothing is reached then the game is still on so it returns null
 	return null;
 	
 	}
@@ -104,9 +109,12 @@ public class TicTacToe {
 		winnerDis.setBounds(10, 285, 186, 20);
 		panel.add(winnerDis);
 		JButton b1 = new JButton("");
+		//adding a button listener to every button with the same code in all of them
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//adding one to player counter to ensure it is the right player's turn
 				player += 1;
+				//checking which player's turn it is and putting their letter on the board where they clicked
 				if(player%2 == 1)
 				{
 					b1.setText("X");
@@ -115,10 +123,13 @@ public class TicTacToe {
 					b1.setText("O");
 					board[0] = "O";
 				}
+				//checking if there is a winner and displaying the value returned from the function
 				String winner = checkWinner();
+				//if no winner or draw then return and resume the game
 				if(winner == null) {
 					return;
 				}
+				//if function came to a verdict then display it
 				winnerDis.setText(winner);
 				
 			}
@@ -129,6 +140,7 @@ public class TicTacToe {
 		panel.add(b1);
 		
 		JButton b4 = new JButton("");
+		//adding a button listener
 		b4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				player += 1;
@@ -153,6 +165,7 @@ public class TicTacToe {
 		panel.add(b4);
 		
 		JButton b7 = new JButton("");
+		//adding a button listener
 		b7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				player += 1;
@@ -176,6 +189,7 @@ public class TicTacToe {
 		panel.add(b7);
 		
 		JButton b2 = new JButton("");
+		//adding a button listener
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				player += 1;
@@ -199,6 +213,7 @@ public class TicTacToe {
 		panel.add(b2);
 		
 		JButton b8 = new JButton("");
+		//adding a button listener
 		b8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				player += 1;
@@ -222,6 +237,7 @@ public class TicTacToe {
 		panel.add(b8);
 		
 		JButton b5 = new JButton("");
+		//adding a button listener
 		b5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				player += 1;
@@ -245,6 +261,7 @@ public class TicTacToe {
 		panel.add(b5);
 		
 		JButton b3 = new JButton("");
+		//adding a button listener
 		b3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				player += 1;
@@ -268,6 +285,7 @@ public class TicTacToe {
 		panel.add(b3);
 		
 		JButton b9 = new JButton("");
+		//adding a button listener
 		b9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				player += 1;
@@ -291,6 +309,7 @@ public class TicTacToe {
 		panel.add(b9);
 		
 		JButton b6 = new JButton("");
+		//adding a button listener
 		b6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				player += 1;

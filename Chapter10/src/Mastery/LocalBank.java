@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class LocalBank {
+	//creating bank object to keep track of accounts and allow methods to be done on the account objects
 	Bank lcBank = new Bank();
 	private JFrame frame;
 	private JTextField accNumText;
@@ -136,6 +137,8 @@ public class LocalBank {
 		
 		actionBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+			/*every time a action is selected the required input fields for the action are turned red
+			to imply they are necessary and the non-necessary ones are turned black*/
 			String choice = (String) actionBox.getSelectedItem();
 			if(choice.equals("Withdrawl")) {
 				accNumberDis.setForeground(Color.red);
@@ -172,6 +175,7 @@ public class LocalBank {
 				beginningBalDis.setForeground(Color.black);
 			
 		}
+			//resetting characters in text fields when a new action is selected
 			accNumText.setText(null);
 			amountofText.setText(null);
 			fNameText.setText(null);
@@ -187,14 +191,16 @@ public class LocalBank {
 		});
 		JButton transactionB = new JButton("Process Transaction");
 		transactionB.addActionListener(new ActionListener() {
+			//listening to when the transaction button is pressed
 			public void actionPerformed(ActionEvent e) {
 				String choice = (String) actionBox.getSelectedItem();
-
+				//checking what action is chosen and if the required fields for that action are filled out
 				if(choice.equals("Withdrawl")) {
 					if(accNumText.getText().equals("") || (amountofText.getText().equals(""))) {
 						resultDis.setText("Required Fields are not filled in");
 						return;
 					}
+					// if the required fields are filled out then money will be withdrawn from the account or will display that there was not enough money
 					String dis = lcBank.transaction(2, accNumText.getText(), Double.parseDouble(amountofText.getText()));
 					resultDis.setText(dis);
 				}else if(choice.equals("Add an account")) {
@@ -202,6 +208,7 @@ public class LocalBank {
 						resultDis.setText("Required Fields are not filled in");
 						return;
 					}
+					// if the required fields are filled out then then it will display the account ID
 					String dis = lcBank.addAccount(fNameText.getText(), lNameText.getText(), Double.parseDouble(beginningBalText.getText()));
 					resultDis.setText(dis);
 				}else if(choice.equals("Remove an account")) {
@@ -209,6 +216,7 @@ public class LocalBank {
 						resultDis.setText("Required Fields are not filled in");
 						return;
 					}
+					// if the required fields are filled out then it will display that the account has been deleted and can no longer be accessed
 					String dis = lcBank.deleteAccount(accNumText.getText());
 					resultDis.setText(dis);
 				}else if(choice.equals("Deposit")) {
@@ -216,6 +224,7 @@ public class LocalBank {
 						resultDis.setText("Required Fields are not filled in");
 						return;
 					}
+					// if the required fields are filled out then the money will be deposited into the account of the account ID entered and display current balance
 					String dis = lcBank.transaction(1, accNumText.getText(), Double.parseDouble(amountofText.getText()));
 					resultDis.setText(dis);
 					beginningBalDis.setForeground(Color.black);
@@ -224,6 +233,7 @@ public class LocalBank {
 						resultDis.setText("Required Fields are not filled in");
 						return;
 					}
+					// if the required fields are filled out then current balance of the account is displayed
 					String dis = lcBank.checkBalance(accNumText.getText());
 					resultDis.setText(dis);
 					
