@@ -26,7 +26,7 @@ public class Bank
 		Account newAcct = new Account(balance, fName, lName);	//create account object
 		accounts.add(newAcct);									//add account to bank accounts
 		
-		return(newAcct.getID());
+		return("Your account ID is: " + newAcct.getID());
 	}
 
 	

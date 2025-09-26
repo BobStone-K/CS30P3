@@ -76,7 +76,7 @@ public class LocalBank {
 		infoWarner.setBounds(21, 77, 237, 22);
 		panel.add(infoWarner);
 		
-		JLabel accNumberDis = new JLabel("Account number:");
+		JLabel accNumberDis = new JLabel("Account ID");
 		accNumberDis.setForeground(new Color(255, 0, 0));
 		accNumberDis.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		accNumberDis.setBounds(21, 102, 169, 20);
@@ -143,13 +143,14 @@ public class LocalBank {
 				fNameDis.setForeground(Color.black);
 				lNameDis.setForeground(Color.black);
 				beginningBalDis.setForeground(Color.black);
+			
 			}else if(choice.equals("Add an account")) {
-				accNumberDis.setForeground(Color.red);
+				accNumberDis.setForeground(Color.black);
 				amountOfDis.setForeground(Color.black);
 				fNameDis.setForeground(Color.red);
 				lNameDis.setForeground(Color.red);
 				beginningBalDis.setForeground(Color.red);
-				
+			
 			}else if(choice.equals("Remove an account")) {
 				accNumberDis.setForeground(Color.red);
 				amountOfDis.setForeground(Color.black);
@@ -169,12 +170,17 @@ public class LocalBank {
 				fNameDis.setForeground(Color.black);
 				lNameDis.setForeground(Color.black);
 				beginningBalDis.setForeground(Color.black);
-				
-			}
 			
+		}
+			accNumText.setText(null);
+			amountofText.setText(null);
+			fNameText.setText(null);
+			lNameText.setText(null);
+			beginningBalText.setText(null);
 			
+
 			
-			
+
 			
 			
 			}
@@ -183,29 +189,43 @@ public class LocalBank {
 		transactionB.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String choice = (String) actionBox.getSelectedItem();
-//				String accId = accNumText.getText();
-//				double amountNum = Double.parseDouble(amountofText.getText());
-				String lName = lNameText.getText();
-//				String fName = fNameText.getText();
-//				double ogBal = Double.parseDouble(beginningBalText.getText());
-//				System.out.println(amountNum);
-				System.out.println(lName);
+
 				if(choice.equals("Withdrawl")) {
 					if(accNumText.getText().equals("") || (amountofText.getText().equals(""))) {
 						resultDis.setText("Required Fields are not filled in");
+						return;
 					}
-					lcBank.transaction(2, accNumText.getText(), Double.parseDouble(amountofText.getText()));
+					String dis = lcBank.transaction(2, accNumText.getText(), Double.parseDouble(amountofText.getText()));
+					resultDis.setText(dis);
 				}else if(choice.equals("Add an account")) {
-		
-					
+					if(lNameText.getText().equals("") || fNameText.getText().equals("") || beginningBalText.getText().equals("")) {
+						resultDis.setText("Required Fields are not filled in");
+						return;
+					}
+					String dis = lcBank.addAccount(fNameText.getText(), lNameText.getText(), Double.parseDouble(beginningBalText.getText()));
+					resultDis.setText(dis);
 				}else if(choice.equals("Remove an account")) {
-			
-					
+					if(accNumText.getText().equals("")) {
+						resultDis.setText("Required Fields are not filled in");
+						return;
+					}
+					String dis = lcBank.deleteAccount(accNumText.getText());
+					resultDis.setText(dis);
 				}else if(choice.equals("Deposit")) {
-		
+					if(accNumText.getText().equals("") || (amountofText.getText().equals(""))) {
+						resultDis.setText("Required Fields are not filled in");
+						return;
+					}
+					String dis = lcBank.transaction(1, accNumText.getText(), Double.parseDouble(amountofText.getText()));
+					resultDis.setText(dis);
 					beginningBalDis.setForeground(Color.black);
 				}else if(choice.equals("Check Balance")) {
-				
+					if(accNumText.getText().equals("")) {
+						resultDis.setText("Required Fields are not filled in");
+						return;
+					}
+					String dis = lcBank.checkBalance(accNumText.getText());
+					resultDis.setText(dis);
 					
 				}
 			}
