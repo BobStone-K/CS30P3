@@ -9,7 +9,7 @@ public class MyFilePart1 {
 		Scanner input = new Scanner(System.in);
 		String fileName;
 		
-		//Obtain file name;
+		//Obtain file names;;
 		System.out.println("Enter file name: ");
 		fileName = input.nextLine();
 		
