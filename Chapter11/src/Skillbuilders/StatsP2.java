@@ -77,12 +77,15 @@ public class StatsP2 {
 			
 			for( int i = 0; i < numStudents; i++) {
 				System.out.println("Enter student name: ");
-				studName = input.nextLine();
+				studName = input.next();
 				System.out.println("Enter test score: ");
-				stuScore = input.nextLine();
+				stuScore = input.next();
+				
 				writeFile.write(studName);
 				writeFile.newLine();
 				writeFile.write(stuScore);
+				writeFile.newLine();
+	
 			}
 			writeFile.close();
 			out.close();
