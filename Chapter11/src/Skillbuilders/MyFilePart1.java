@@ -13,7 +13,7 @@ public class MyFilePart1 {
 		System.out.println("Enter file name: ");
 		fileName = input.nextLine();
 		
-		//Determine is file exists
+		//Determine if file exists
 		File textFile = new File(fileName);
 		if(textFile.exists()) {
 			System.out.println("File does exist");

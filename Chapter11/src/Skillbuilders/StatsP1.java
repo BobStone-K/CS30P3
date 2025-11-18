@@ -19,7 +19,7 @@ public class StatsP1 {
 	private JFrame frame;
 
 	/**
-	 * Launch the application.
+	 * Launch the applications.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {

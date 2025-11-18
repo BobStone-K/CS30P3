@@ -40,7 +40,7 @@ public class MyFilePart2 {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * Initializes the contents of the frame.
 	 */
 	private void initialize() {
 		File textFile = new File(FILE_PATH);

@@ -23,7 +23,7 @@ public class StatsP2GUI extends JFrame {
     }
     
     private void initializeGUI() {
-        // Set up the main frame
+        // Setting up the main frame
         setTitle("Student Statistics Manager");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 500);
