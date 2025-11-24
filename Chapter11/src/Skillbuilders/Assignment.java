@@ -78,6 +78,7 @@ public class Assignment {
 		frame.getContentPane().add(disArea);
 		
 		JButton loadButton = new JButton("Load Instruction");
+		loadButton.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		loadButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String filePath = "C:\\Users\\38262004\\git\\CS30P3\\Chapter11\\src\\Skillbuilders\\" + fileNameField.getText().trim();
