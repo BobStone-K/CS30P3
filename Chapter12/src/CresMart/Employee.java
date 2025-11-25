@@ -18,5 +18,7 @@ public abstract class Employee {
 		return(firstName+ " " + lastName);
 	}
 	
+	
+	
 	abstract double pay(double period);
 }
