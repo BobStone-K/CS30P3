@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class Roster {
+public class Roster extends JFrame{
 
 	private JFrame frame;
 	private JTextField fileNameField;
