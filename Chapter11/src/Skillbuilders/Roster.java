@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 
-public class Roster {
+public class Roster extends JFrame {
 
 	private JFrame frame;
 	private JTextField fileNameField;
@@ -106,24 +106,36 @@ public class Roster {
 	      
 	      StuName[] students = {};
 	      
-	      for (int i = 0; i < numStu; i++) 
-          {
-              JPanel inputDialog = new JPanel(new GridLayout(2, 2, 5, 5));
-              
-              JTextField nameField = new JTextField();
-              JTextField scoreField = new JTextField();
-              
-              inputDialog.add(new JLabel("Student First Name:"));
-              inputDialog.add(nameField);
-              inputDialog.add(new JLabel("Student Last Name:"));
-              inputDialog.add(scoreField);
-              
-              int result = JOptionPane.showConfirmDialog(inputDialog, 
-                  "Enter data for Student " + (i + 1) );
-              
-              if (result != JOptionPane.OK_OPTION) {
-                  break; // User cancelled
-              }
-	}
+	      for (int i = 0; i < numStu; i++) {
+          JPanel inputDialog = new JPanel(new GridLayout(2, 2, 5, 5));
+          
+          JTextField nameField = new JTextField();
+          JTextField scoreField = new JTextField();
+          
+          inputDialog.add(new JLabel("Student Name:"));
+          inputDialog.add(nameField);
+          inputDialog.add(new JLabel("Test Score:"));
+          inputDialog.add(scoreField);
+          
+          int result = JOptionPane.showConfirmDialog(this, inputDialog, 
+              "Enter data for Student " + (i + 1), 
+              JOptionPane.OK_CANCEL_OPTION);
+          
+          if (result != JOptionPane.OK_OPTION) {
+              break; // User cancelled
+          }
+          
+          String stuName = nameField.getText().trim();
+          String score = scoreField.getText().trim();
+          
+          if (stuName.isEmpty() || score.isEmpty()) {
+              JOptionPane.showMessageDialog(this, 
+                  "Please enter both name and score for student " + (i + 1), 
+                  "Input Error", 
+                  JOptionPane.WARNING_MESSAGE);
+              i--; // Retry this student
+              continue;
+          }
+}
 }
 }
