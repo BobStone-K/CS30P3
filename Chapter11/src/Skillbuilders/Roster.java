@@ -15,7 +15,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import java.io.*;
 
 public class Roster extends JFrame {
 
@@ -78,7 +78,8 @@ public class Roster extends JFrame {
 		JButton enterBtn = new JButton("Enter");
 		enterBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				writeFile();
+				StringBuilder displayText  = writeFile();
+				displayArea.setText(displayText.toString());
 			
 			}
 		});
@@ -88,34 +89,36 @@ public class Roster extends JFrame {
 
 	
 	
-	private void writeFile() {
+	private StringBuilder writeFile() {
 		 String fileName = fileNameField.getText().trim();
 	      if (fileName.isEmpty()) 
 	        {
 	            JOptionPane.showInputDialog( fileNameField, JOptionPane.WARNING_MESSAGE, "Please enter both file name and number of students.");
-	            return;
+	            return null;
 	        }
-	      	
+	     
 	      String numStust = JOptionPane.showInputDialog(null, "How many students do you have");
 	      int numStu = Integer.parseInt(numStust);
 	      if (numStu < 0) 
 	        {
 	            JOptionPane.showInputDialog( fileNameField, JOptionPane.WARNING_MESSAGE, "Please enter a tangible number of students");
-	            return;
+	            return null;
 	        }
 	      
-	      StuName[] students = {};
+	      StuName[] students = new StuName[numStu];
+	      
+	      StringBuilder studentData = new StringBuilder();
 	      
 	      for (int i = 0; i < numStu; i++) {
           JPanel inputDialog = new JPanel(new GridLayout(2, 2, 5, 5));
           
-          JTextField nameField = new JTextField();
-          JTextField scoreField = new JTextField();
+          JTextField fNameField = new JTextField();
+          JTextField lNameField = new JTextField();
           
-          inputDialog.add(new JLabel("Student Name:"));
-          inputDialog.add(nameField);
-          inputDialog.add(new JLabel("Test Score:"));
-          inputDialog.add(scoreField);
+          inputDialog.add(new JLabel("First Name:"));
+          inputDialog.add(fNameField);
+          inputDialog.add(new JLabel("Last Name:"));
+          inputDialog.add(lNameField);
           
           int result = JOptionPane.showConfirmDialog(this, inputDialog, 
               "Enter data for Student " + (i + 1), 
@@ -125,10 +128,10 @@ public class Roster extends JFrame {
               break; // User cancelled
           }
           
-          String stuName = nameField.getText().trim();
-          String score = scoreField.getText().trim();
+          String fName = fNameField.getText().trim();
+          String lName = lNameField.getText().trim();
           
-          if (stuName.isEmpty() || score.isEmpty()) {
+          if (fName.isEmpty() || lName.isEmpty()) {
               JOptionPane.showMessageDialog(this, 
                   "Please enter both name and score for student " + (i + 1), 
                   "Input Error", 
@@ -136,6 +139,34 @@ public class Roster extends JFrame {
               i--; // Retry this student
               continue;
           }
+         students[i] = new StuName(fName, lName);
+         studentData.append(fName).append(" ").append(lName).append("\n");
 }
+	      try {
+	    	  File dataFile = new File(fileName);
+	          FileWriter out = new FileWriter(dataFile, true); // append mode
+	          BufferedWriter writeFile = new BufferedWriter(out);   
+	          
+	          for (int i = 0; i < numStu; i++) {
+	              writeFile.write(students[i].toString());
+	                writeFile.newLine();
+	          }
+	          writeFile.close();
+              out.close();
+	      } catch(IOException e){
+	    	  JOptionPane.showMessageDialog(this, 
+	                  "File could not be created: " + e.getMessage(), 
+	                  "File Error", 
+	                  JOptionPane.ERROR_MESSAGE);
+	      }
+	      
+	 
+	      return studentData;
+	      
+	      
 }
+	
+	
+	
+	
 }
