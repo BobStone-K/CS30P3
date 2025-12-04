@@ -17,7 +17,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.*;
 
+<<<<<<< HEAD
 public class Roster extends JFrame {
+=======
+
+public class Roster extends JFrame{
+>>>>>>> branch 'master' of https://github.com/BobStone-K/CS30P3.git
 
 	private JFrame frame;
 	private JTextField fileNameField;
