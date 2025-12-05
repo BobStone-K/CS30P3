@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.*;
+import java.text.DecimalFormat;
 public class StudentSemesterAverageGUI {
 
 	private JFrame frame;
@@ -23,7 +24,7 @@ public class StudentSemesterAverageGUI {
 	private JTextField grade2Field;
 	private JTextField grade3Field;
 	private JTextField grade4Field;
-	
+	DecimalFormat dfDefault = new DecimalFormat("0.00");
 	private static final String FILE_NAME = "StudentGrades.txt";
 	private File dataFile = new File(FILE_NAME);
 
@@ -162,9 +163,12 @@ public class StudentSemesterAverageGUI {
 						try {
 							double avgGrade = ((Double.parseDouble(g1)) + (Double.parseDouble(g2)) + 
 											(Double.parseDouble(g3)) + (Double.parseDouble(g4))) / 4;
-							average.setText("Average: " + decimalFormat.for);		
-									
-						} finally {
+							average.setText("Average: " + dfDefault.format(avgGrade));		
+							
+							;
+					          FileWriter out = new FileWriter(dataFile, true); // append mode
+					          BufferedWriter writeFile = new BufferedWriter(out);  
+						} catch {io 
 								
 					}
 					}
