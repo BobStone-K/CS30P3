@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.*;
 import java.text.DecimalFormat;
-public class StudentSemesterAverageGUI {
+public class StudentSemesterAverageGUI extends JFrame{
 
 	private JFrame frame;
 	private JTextField studentNameField;
@@ -24,7 +24,7 @@ public class StudentSemesterAverageGUI {
 	private JTextField grade2Field;
 	private JTextField grade3Field;
 	private JTextField grade4Field;
-	DecimalFormat dfDefault = new DecimalFormat("0.00");
+	//constant for which file to save to
 	private static final String FILE_NAME = "StudentGrades.txt";
 	private File dataFile = new File(FILE_NAME);
 
@@ -55,6 +55,9 @@ public class StudentSemesterAverageGUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		//creating formatter that can be used by anything within the function
+		DecimalFormat decimalFormatter = new DecimalFormat("0.#");
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 543, 573);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -146,6 +149,7 @@ public class StudentSemesterAverageGUI {
 		JButton saveFileBtn = new JButton("Save To File");
 		saveFileBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//getting all the values user inputs
 				String stuName = studentNameField.getText().trim();
 				String gradelvl = gradeLevelField.getText().trim();
 				String semNum = semesterNumberField.getText().trim();
@@ -153,7 +157,7 @@ public class StudentSemesterAverageGUI {
 				String g2 = grade2Field.getText().trim();
 				String g3 = grade3Field.getText().trim();
 				String g4 = grade4Field.getText().trim();
-				
+				//making sure no text fields are empty and prompting user if they are to make sure all are full
 				if (stuName.isEmpty() ||gradelvl.isEmpty() || semNum.isEmpty() || g1.isEmpty() || g2.isEmpty() 
 						|| g3.isEmpty()|| g4.isEmpty())
 					{
@@ -161,28 +165,113 @@ public class StudentSemesterAverageGUI {
 								"Input Error", JOptionPane.WARNING_MESSAGE);
 					} else {
 						try {
+							//setting user's average
 							double avgGrade = ((Double.parseDouble(g1)) + (Double.parseDouble(g2)) + 
 											(Double.parseDouble(g3)) + (Double.parseDouble(g4))) / 4;
-							average.setText("Average: " + dfDefault.format(avgGrade));		
+							average.setText("Average: " + decimalFormatter.format(avgGrade));		
 							
 							;
+							//file writing tools
+								StringBuilder output = new StringBuilder();
 					          FileWriter out = new FileWriter(dataFile, true); // append mode
-					          BufferedWriter writeFile = new BufferedWriter(out);  
-						} catch {io 
+					          BufferedWriter writeFile = new BufferedWriter(out); 
+					          
+					          	//adding all text for one line in string builder
+					          	output.append("Name: ").append(stuName);
+								output.append(" Grade Level: ");
+								output.append(gradelvl).append(" Semester: ");
+								output.append(semNum);
+								output.append(" Grades: ");
+								output.append(decimalFormatter.format(Double.parseDouble(g1))).append("%, ");
+								output.append(decimalFormatter.format(Double.parseDouble(g2))).append("%, ");
+								output.append(decimalFormatter.format(Double.parseDouble(g3))).append("%, ");
+								output.append(decimalFormatter.format(Double.parseDouble(g4))).append("%, ");
+								output.append(" Average: ").append(decimalFormatter.format(avgGrade)).append("%");
+								//adding everything needed for one line in string builder to file via file writer
+								writeFile.write(output.toString());
+								writeFile.newLine();
+								//closing filer writer
+								writeFile.close();
+								out.close();
+								
+								//confirmation pop up
+								JOptionPane.showMessageDialog(null, "Data saved to file " + FILE_NAME,
+										"Message", JOptionPane.INFORMATION_MESSAGE);
+						} catch (IOException ex) {
+							 JOptionPane.showMessageDialog(null, 
+					                  "Could not be saved to file: \n" + ex.getMessage(), 
+					                  "File Error", 
+					                  JOptionPane.ERROR_MESSAGE);
 								
 					}
 					}
 				
 		}});
-		saveFileBtn.setBounds(115, 495, 138, 23);
+		saveFileBtn.setBounds(61, 495, 138, 23);
 		panel.add(saveFileBtn);
 		
 		JButton viewContentBtn = new JButton("View File Content");
 		viewContentBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				displayArea.setText(null);
+				
+				try 
+				{
+					// Initializing file reader tools
+					FileReader in = new FileReader(dataFile);
+					BufferedReader readFile = new BufferedReader(in);
+					String line;
+					StringBuilder output = new StringBuilder();
+					
+					//reads file and makes a new line whenever there is text
+					while ((line = readFile.readLine()) != null)
+					{
+						output.append(line).append("\n");
+					}
+					readFile.close();
+					in.close();
+
+					displayArea.setText(output.toString());
+				}
+				
+				//error messages 
+				catch (FileNotFoundException err)
+				{
+					JOptionPane.showMessageDialog(null, "File could not be found\n" + err.getMessage(),
+							"File Error", JOptionPane.ERROR_MESSAGE);
+				}
+				catch (IOException err)
+				{
+					JOptionPane.showMessageDialog(null, "Error reading file: \n" + err.getMessage(),
+							"File Error", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
-		viewContentBtn.setBounds(263, 495, 138, 23);
+		viewContentBtn.setBounds(355, 495, 138, 23);
 		panel.add(viewContentBtn);
+		
+		JButton clearBtn = new JButton("Clear File Content");
+		clearBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//clearing the file
+				
+				try {
+					//using fileOutputStream to wipe data from file
+					FileOutputStream fos = new FileOutputStream(dataFile);
+					//letting user know file has been cleared
+					JOptionPane.showMessageDialog(null, "Data cleared from file " + FILE_NAME,
+							"Message", JOptionPane.INFORMATION_MESSAGE);
+
+					displayArea.setText("Data has been cleared from file " + FILE_NAME);
+				} catch (FileNotFoundException err) {
+					// catching error
+					err.printStackTrace();
+				}
+				
+				
+			}
+		});
+		clearBtn.setBounds(209, 495, 138, 23);
+		panel.add(clearBtn);
 	}
 }

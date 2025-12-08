@@ -100,7 +100,7 @@ public class Assignment {
 					 }
 				disArea.setText(output.toString());	 
 				} catch(IOException ex) {
-						 System.err.print("Error: " + ex.getMessage() + " while reaidng file");
+						 System.err.print("Error: " + ex.getMessage() + " while reading file");
 					 }
 			}
 		});
