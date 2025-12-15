@@ -21,7 +21,7 @@ public class Faculty extends UEmployee {
 	}
 	
 
-	
+	//overiding toString function to output everything superclass would plus department name
 	public String toString() {
 	        return super.toString() + ", Department: " + dName;
 	 }
