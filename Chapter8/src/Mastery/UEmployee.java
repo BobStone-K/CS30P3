@@ -27,6 +27,6 @@ public abstract class UEmployee {
 	//toString method which returns everything about employee object
 	public String toString()
 	{
-		return("Employee name: " + employeeName + ", Salary: " + salary + "\n");
+		return("Employee name: " + employeeName + ", Salary: " + salary);
 	}
 }

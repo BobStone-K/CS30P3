@@ -1,6 +1,6 @@
 package Skillbuilders;
 
-public class Rectangle {
+public class Rectangle implements Comparable<Rectangle>, ComparableArea {
 	private double length, width;
 	//creating two constructor method one overloaded with parameters other without
 	public Rectangle(){
@@ -40,22 +40,48 @@ public class Rectangle {
 		System.out.println("The formula for a rectangle is a = L * W");
 	}
 	//checking if length and width of rectangle is equal to another rectangle of the same class
-
-	
-	
 	public boolean equals(Object r)
 	{
 		Rectangle testRec = (Rectangle)r;
 	      if (r instanceof Rectangle) {
-	            Rectangle other = (Rectangle)r;
+	           
 	            return this.length == testRec.length && this.width == testRec.width;
 	        }
 	        return false;
 	}
 	
-	//method to output current length and width of rectangle
-	public String toString() {
-		String rectangleString = "Rectangle has length of " + length + " and width is" + width;
-		return(rectangleString);
+	
+	
+	
+	
+	
+	
+	//method to output current length, width, area, and perimeter
+    @Override
+    public String toString() {
+        return "Rectangle Length=" + length +
+               ", Width: " + width +
+               ", Area: " + area() +
+               ", Perimeter: " + perimeter();
+    }
+	@Override
+	public int compareTo(Rectangle o) {
+		 if (this.length > o.length) return 1;
+	        if (this.length < o.length) return -1;
+
+	        // if length is equal then compare width
+	        return Double.compare(this.width, o.width);
 	}
+	
+	//method to compare area of two rectangles 
+    public int compareToArea(Rectangle o) {
+        double thisArea = this.area();
+        double thatArea = o.area();
+        // will return from -1 to 1 depending on what is bigger or if same size
+        if (thisArea == thatArea) {
+        	return 0;
+        }
+        if (thisArea < thatArea) return -1;
+        return 1;
+    }
 }
