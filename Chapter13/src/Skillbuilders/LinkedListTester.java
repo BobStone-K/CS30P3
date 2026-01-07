@@ -17,11 +17,11 @@ public class LinkedListTester {
 		
 		System.out.println(list);
 		
-		System.out.println("List size: " + list.size() + "Items.");
+		System.out.println("List size: " + list.size() + " Items.");
 		
 		list.makeEmpty();
 		
-		System.out.println("List size: " + list.size() + "Items.");
+		System.out.println("List size: " + list.size() + " Items.");
 	}
 
 }
