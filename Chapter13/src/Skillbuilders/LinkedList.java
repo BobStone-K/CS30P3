@@ -48,7 +48,7 @@ public class LinkedList {
 		else
 		{
 				
-			while(current.getNext() != null);
+			while(current.getNext() != null)
 			{
 				previous = current;
 				current = current.getNext();
