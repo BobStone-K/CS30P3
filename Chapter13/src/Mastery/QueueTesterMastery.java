@@ -1,3 +1,17 @@
+/*
+
+Program: QueueTesterMastery.java          Last Date of this Revision: January 15, 2026
+
+Purpose: An application that tests the queue data structure class
+
+Author: Youdis Acharya, 
+School: CHHS
+Course: Computer Science 30
+ 
+
+*/
+
+
 package Mastery;
 
 import Skillbuilders.Queue2;
@@ -44,3 +58,21 @@ public class QueueTesterMastery {
 	
 
 }
+/* Screen Dump
+
+Adding "Lebron", "Gretta", and "Lamine" to Nightclub line.
+Front of Nightclub line: Lebron
+Size of Nightclub line: 3
+Remove an element from Nightclub line: Lebron
+Size of Nightclub line: 2
+Adding Tiger Woods
+Front of Nightclub line: Gretta
+Size of Nightclub line: 3
+Adding "Justin" and "Dwayne" 
+Front of Nightclub line: Gretta
+Size of Nightclub line: 5
+Removing "Lamine", "Tiger Woods", "Justin", and "Dwayne" to Nightclub line.
+Size of Nightclub line: 0
+
+ 
+ */

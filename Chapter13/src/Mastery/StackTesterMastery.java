@@ -1,3 +1,19 @@
+/*
+
+Program: StackTesterMastery.java          Last Date of this Revision: January 15, 2026
+
+Purpose: An application that tests the stack data structure class
+
+Author: Youdis Acharya, 
+School: CHHS
+Course: Computer Science 30
+ 
+
+*/
+
+
+
+
 package Mastery;
 
 import Skillbuilders.Stack2;
@@ -27,3 +43,19 @@ public class StackTesterMastery {
 	}
 
 }
+
+/* Screen Dump
+
+Adding Call of Duty, The Division, and Spiderman
+Top of game tower: Spiderman
+game tower size: 3
+Top of game tower: The Division
+game tower size: 2
+Adding Dragonball
+Top of game tower: Dragonball
+game tower size: 3
+Emptying Stack
+game tower size: 0
+
+ 
+ */
